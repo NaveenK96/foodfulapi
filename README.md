@@ -2,7 +2,7 @@
 You should be able to do
 `npm install` and `nodemon server.js`
 
-You migth ave to install ndoemon on the vagrant machine using
-npm install -g nodemon
+You migth have to install nodemon on the vagrant machine using
+`npm install -g nodemon`
 
 
