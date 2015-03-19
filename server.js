@@ -37,6 +37,13 @@ homeRoute.get(function(req, res) {
   res.json({ message: 'Hello World!' });
 });
 
+//Llama route 
+var llamaRoute = router.route('/llamas');
+
+llamaRoute.get(function(req, res) {
+  res.json([{ "name": "alice", "height": 12 }, { "name": "jane", "height": 13 }]);
+});
+
 //Add more routes here
 
 // Start the server
