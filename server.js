@@ -27,7 +27,7 @@ app.use(bodyParser.urlencoded({
   extended: true
 }));
 
-// Register all our routes with /api
+// All our routes will start with /api
 app.use('/api', router);
 
 //Default route here
