@@ -1,9 +1,10 @@
 {
-  "name": "mp3_server_starter",
+  "name": "mp4_server_starter",
   "version": "1.0.0",
-  "homepage": "https://github.com/uiuc-web-programming/mp3_server_starter",
+  "homepage": "https://github.com/uiuc-web-programming/mp4_server_starter",
   "authors": [
-    "biplabdeka <biplab.deka@gmail.com>"
+    "biplabdeka <biplab.deka@gmail.com>",
+    "sskhandek <sskhandek@gmail.com>"
   ],
   "dependencies": {
     "body-parser": "^1.12.0",

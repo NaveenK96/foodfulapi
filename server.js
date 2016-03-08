@@ -6,7 +6,7 @@ var bodyParser = require('body-parser');
 var router = express.Router();
 
 //replace this with your Mongolab URL
-mongoose.connect('mongodb://localhost/mp3');
+mongoose.connect('mongodb://localhost/mp4');
 
 // Create our Express application
 var app = express();
@@ -37,7 +37,7 @@ homeRoute.get(function(req, res) {
   res.json({ message: 'Hello World!' });
 });
 
-//Llama route 
+//Llama route
 var llamaRoute = router.route('/llamas');
 
 llamaRoute.get(function(req, res) {
@@ -48,4 +48,4 @@ llamaRoute.get(function(req, res) {
 
 // Start the server
 app.listen(port);
-console.log('Server running on port ' + port); 
+console.log('Server running on port ' + port);
