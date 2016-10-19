@@ -1,18 +1,13 @@
 // Get the packages we need
 var express = require('express');
-var mongoose = require('mongoose');
-var Llama = require('./models/llama');
-var bodyParser = require('body-parser');
 var router = express.Router();
-
-//replace this with your Mongolab URL
-mongoose.connect('mongodb://localhost/mp4');
+var bodyParser = require('body-parser');
 
 // Create our Express application
 var app = express();
 
-// Use environment defined port or 4000
-var port = process.env.PORT || 4000;
+// Use environment defined port or 3000
+var port = process.env.PORT || 3000;
 
 //Allow CORS so that backend and frontend could pe put on different servers
 var allowCrossDomain = function(req, res, next) {
@@ -27,24 +22,8 @@ app.use(bodyParser.urlencoded({
   extended: true
 }));
 
-// All our routes will start with /api
-app.use('/api', router);
-
-//Default route here
-var homeRoute = router.route('/');
-
-homeRoute.get(function(req, res) {
-  res.json({ message: 'Hello World!' });
-});
-
-//Llama route
-var llamaRoute = router.route('/llamas');
-
-llamaRoute.get(function(req, res) {
-  res.json([{ "name": "alice", "height": 12 }, { "name": "jane", "height": 13 }]);
-});
-
-//Add more routes here
+// Use routes as a module (see index.js)
+require('./routes')(app, router);
 
 // Start the server
 app.listen(port);
