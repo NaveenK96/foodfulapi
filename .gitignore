@@ -1,0 +1,9 @@
+.DS_Store
+
+.sass-cache/
+node_modules/
+npm-debug.log
+public/css/
+public/js/
+public/lib/
+config/secrets.js
