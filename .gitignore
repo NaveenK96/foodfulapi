@@ -6,4 +6,4 @@ npm-debug.log
 public/css/
 public/js/
 public/lib/
-config/secrets.js
+config/credentials.js

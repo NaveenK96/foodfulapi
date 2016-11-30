@@ -1,7 +1,17 @@
+var credentials = require('./config/credentials');
 // Get the packages we need
 var express = require('express');
 var router = express.Router();
 var bodyParser = require('body-parser');
+var mongoose = require('mongoose');
+
+// Connect to mongoDB
+mongoose.connect(credentials.connection_string)
+.then(function(){
+  console.log("connection successful");
+}, function(err){
+  console.log(err);
+});
 
 // Create our Express application
 var app = express();
@@ -31,3 +41,5 @@ require('./routes')(app, router);
 // Start the server
 app.listen(port);
 console.log('Server running on port ' + port);
+
+
