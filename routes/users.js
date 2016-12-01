@@ -10,11 +10,21 @@ module.exports = function(router) {
   userRoute.get(function(req, res) {
     //User.find()
     // TODO: implement this
-    res.json({
-      message: 'howdy bro',
-      data: []
+    User.find(function(err, users){
+      if (err){
+        res.status(500);
+        res.json({
+          message: err,
+          data: []
+        });
+      }else{
+        res.status(200);
+        res.json({
+          message: 'Got em',
+          data: users
+        });
+      }
     });
-
   });
 
   /* POST /users */

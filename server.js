@@ -4,6 +4,9 @@ var express = require('express');
 var router = express.Router();
 var bodyParser = require('body-parser');
 var mongoose = require('mongoose');
+var passport = require('passport');
+require('./models/user');
+require('./config/passport');
 
 // Connect to mongoDB
 mongoose.connect(credentials.connection_string)
@@ -19,6 +22,8 @@ var app = express();
 // Use environment defined port or 3000
 var port = process.env.PORT || 3000;
 
+app.use(passport.initialize());
+//app.use('/api', routesApi);
 //Allow CORS so that backend and frontend could pe put on different servers
 var allowCrossDomain = function(req, res, next) {
   res.header("Access-Control-Allow-Origin", "*");
