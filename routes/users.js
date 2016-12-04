@@ -8,9 +8,9 @@ module.exports = function(router) {
   /* HTTP Methods */
   /* GET /users/ */
   userRoute.get(function(req, res) {
-    //User.find()
     // TODO: implement this
-    User.find(function(err, users){
+
+    User.find(req.query, function(err, users){
       if (err){
         res.status(500);
         res.json({

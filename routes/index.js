@@ -5,6 +5,7 @@
 
 module.exports = function (app, router) {
   app.use('/api', require('./home.js')(router));
+  app.use('/api', require('./search.js')(router));
   app.use('/api', require('./users.js')(router));
   app.use('/api', require('./login.js')(router));
   app.use('/api', require('./register.js')(router));

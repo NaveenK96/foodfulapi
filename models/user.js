@@ -21,7 +21,8 @@ var UserSchema = new mongoose.Schema({
   phone_number: { type: Number, required: true },
   location: { type: [Number], index: '2dsphere', required: true }, // [Long, Lat], index important for proximity searches
   hour: { type: Date, required: true},
-  amount: { type: Number, default: 0 },  
+  amount: { type: Number, default: 0 }, 
+  rating: { type: Number, default: 0 }, 
   created_date: { type: Date, default: Date.now },
   updated_date: { type: Date, default: Date.now },
 })
