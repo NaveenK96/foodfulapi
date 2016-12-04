@@ -37,8 +37,8 @@ def getUsers(conn):
 def main(argv):
 
     # Server Base URL and port
-    baseurl = "www.uiucwp.com"
-    port = 4000
+    baseurl = "fa16-cs498rk-016.cs.illinois.edu/"
+    port = 3000
 
     # Number of POSTs that will be made to the server
     userCount = 50
@@ -66,6 +66,15 @@ def main(argv):
     firstNames = ["james","john","robert","michael","william","david","richard","charles","joseph","thomas","christopher","daniel","paul","mark","donald","george","kenneth","steven","edward","brian","ronald","anthony","kevin","jason","matthew","gary","timothy","jose","larry","jeffrey","frank","scott","eric","stephen","andrew","raymond","gregory","joshua","jerry","dennis","walter","patrick","peter","harold","douglas","henry","carl","arthur","ryan","roger","joe","juan","jack","albert","jonathan","justin","terry","gerald","keith","samuel","willie","ralph","lawrence","nicholas","roy","benjamin","bruce","brandon","adam","harry","fred","wayne","billy","steve","louis","jeremy","aaron","randy","howard","eugene","carlos","russell","bobby","victor","martin","ernest","phillip","todd","jesse","craig","alan","shawn","clarence","sean","philip","chris","johnny","earl","jimmy","antonio","danny","bryan","tony","luis","mike","stanley","leonard","nathan","dale","manuel","rodney","curtis","norman","allen","marvin","vincent","glenn","jeffery","travis","jeff","chad","jacob","lee","melvin","alfred","kyle","francis","bradley","jesus","herbert","frederick","ray","joel","edwin","don","eddie","ricky","troy","randall","barry","alexander","bernard","mario","leroy","francisco","marcus","micheal","theodore","clifford","miguel","oscar","jay","jim","tom","calvin","alex","jon","ronnie","bill","lloyd","tommy","leon","derek","warren","darrell","jerome","floyd","leo","alvin","tim","wesley","gordon","dean","greg","jorge","dustin","pedro","derrick","dan","lewis","zachary","corey","herman","maurice","vernon","roberto","clyde","glen","hector","shane","ricardo","sam","rick","lester","brent","ramon","charlie","tyler","gilbert","gene"]
     lastNames = ["smith","johnson","williams","jones","brown","davis","miller","wilson","moore","taylor","anderson","thomas","jackson","white","harris","martin","thompson","garcia","martinez","robinson","clark","rodriguez","lewis","lee","walker","hall","allen","young","hernandez","king","wright","lopez","hill","scott","green","adams","baker","gonzalez","nelson","carter","mitchell","perez","roberts","turner","phillips","campbell","parker","evans","edwards","collins","stewart","sanchez","morris","rogers","reed","cook","morgan","bell","murphy","bailey","rivera","cooper","richardson","cox","howard","ward","torres","peterson","gray","ramirez","james","watson","brooks","kelly","sanders","price","bennett","wood","barnes","ross","henderson","coleman","jenkins","perry","powell","long","patterson","hughes","flores","washington","butler","simmons","foster","gonzales","bryant","alexander","russell","griffin","diaz","hayes"]
 
+    typeIDs = [0,1]
+
+    phoneNumbers = ["0123456789","1234567890"]
+
+    locations = [[1,2], [2,3], [2,4]]
+
+    hours = [[1,30,2,30], [2,20,15,20]]
+ 
+
     # Server to connect to (1: url, 2: port number)
     conn = httplib.HTTPConnection(baseurl, port)
 
@@ -83,12 +92,28 @@ def main(argv):
         # Pick a random first name and last name
         x = randint(0,99)
         y = randint(0,99)
-        params = urllib.urlencode({'name': firstNames[x] + " " + lastNames[y], 'email': firstNames[x] + "@" + lastNames[y] + ".com"})
+        randPhone = randint(0, len(phoneNumbers)-1)
+        randType = randint(0,1)
+        randLocation = randint(0,len(locations)-1)
+        randHour = randint(0, len(hours)-1)
+        params = urllib.urlencode(
+            {
+                'typeID': typeIDs[randType],
+                'name': firstNames[x] + " " + lastNames[y], 
+                'email': firstNames[x] + "@" + lastNames[y] + ".com",
+                'phone_number': phoneNumbers[randPhone],
+                'location': locations[randLocation],
+                'start_hour': hours[randHour][0],
+                'start_minute': hours[randHour][1],
+                'end_hour': hours[randHour][2],
+                'end_hour': hours[randHour][3]
+            })
         
-        # POST the user
-        conn.request("POST", "/api/users", params, headers)
+        # POST the register
+        conn.request("POST", "/api/register", params, headers)
         response = conn.getresponse()
         data = response.read()
+        print data
         d = json.loads(data)
 
         # Store the users id
@@ -97,59 +122,59 @@ def main(argv):
         userEmails.append(str(d['data']['email']))
 
     # Open 'tasks.txt' for sample task names
-    f = open('tasks.txt','r')
-    taskNames = f.read().splitlines()
+#    f = open('tasks.txt','r')
+#     taskNames = f.read().splitlines()
 
-    # Loop 'taskCount' number of times
-    for i in xrange(taskCount):
+#     # Loop 'taskCount' number of times
+#     for i in xrange(taskCount):
 
-        # Randomly generate task parameters
-        assigned = (randint(0,10) > 4)
-        assignedUser = randint(0,len(userIDs)-1) if assigned else -1
-        assignedUserID = userIDs[assignedUser] if assigned else ''
-        assignedUserName = userNames[assignedUser] if assigned else 'unassigned'
-        assignedUserEmail = userEmails[assignedUser] if assigned else 'unassigned'
-        completed = (randint(0,10) > 5)
-        deadline = (mktime(date.today().timetuple()) + randint(86400,864000)) * 1000
-        description = "It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using 'Content here, content here', making it look like readable English."
-        params = urllib.urlencode({'name': choice(taskNames), 'deadline': deadline, 'assignedUserName': assignedUserName, 'assignedUser': assignedUserID, 'completed': str(completed).lower(), 'description': description})
+#         # Randomly generate task parameters
+#         assigned = (randint(0,10) > 4)
+#         assignedUser = randint(0,len(userIDs)-1) if assigned else -1
+#         assignedUserID = userIDs[assignedUser] if assigned else ''
+#         assignedUserName = userNames[assignedUser] if assigned else 'unassigned'
+#         assignedUserEmail = userEmails[assignedUser] if assigned else 'unassigned'
+#         completed = (randint(0,10) > 5)
+#         deadline = (mktime(date.today().timetuple()) + randint(86400,864000)) * 1000
+#         description = "It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using 'Content here, content here', making it look like readable English."
+#         params = urllib.urlencode({'name': choice(taskNames), 'deadline': deadline, 'assignedUserName': assignedUserName, 'assignedUser': assignedUserID, 'completed': str(completed).lower(), 'description': description})
 
-        # POST the task
-        conn.request("POST", "/api/tasks", params, headers)
-        response = conn.getresponse()
-        data = response.read()
-        d = json.loads(data)
+#         # POST the task
+#         conn.request("POST", "/api/tasks", params, headers)
+#         response = conn.getresponse()
+#         data = response.read()
+#         d = json.loads(data)
 
-        taskID = str(d['data']['_id'])
+#         taskID = str(d['data']['_id'])
 
-        # Make sure the task is added to the pending list of the user
-        if assigned and not completed:
-            # GET the correct user
-            conn.request("GET","""/api/users?where={"_id":\""""+assignedUserID+"""\"}""")
-            response = conn.getresponse()
-            data = response.read()
-            d = json.loads(data)
+#         # Make sure the task is added to the pending list of the user
+#         if assigned and not completed:
+#             # GET the correct user
+#             conn.request("GET","""/api/users?where={"_id":\""""+assignedUserID+"""\"}""")
+#             response = conn.getresponse()
+#             data = response.read()
+#             d = json.loads(data)
 
-            # Store all the user properties
-            assignedUserName = str(d['data'][0]['name'])
-            assignedUserEmail = str(d['data'][0]['email'])
-            assignedUserDate = str(d['data'][0]['dateCreated'])
+#             # Store all the user properties
+#             assignedUserName = str(d['data'][0]['name'])
+#             assignedUserEmail = str(d['data'][0]['email'])
+#             assignedUserDate = str(d['data'][0]['dateCreated'])
 
-            # Append the new taskID to pending tasks
-            assignedUserTasks = d['data'][0]['pendingTasks']
-            assignedUserTasks = [str(x).replace('[','').replace(']','').replace("'",'').replace('"','') for x in assignedUserTasks]
-            assignedUserTasks.append(taskID)
+#             # Append the new taskID to pending tasks
+#             assignedUserTasks = d['data'][0]['pendingTasks']
+#             assignedUserTasks = [str(x).replace('[','').replace(']','').replace("'",'').replace('"','') for x in assignedUserTasks]
+#             assignedUserTasks.append(taskID)
 
-            # PUT in the user
-            params = urllib.urlencode({'_id': assignedUserID, 'name': assignedUserName, 'email': assignedUserEmail, 'dateCreated': assignedUserDate, 'pendingTasks': assignedUserTasks}, True)
-            conn.request("PUT", "/api/users/"+assignedUserID, params, headers)
-            response = conn.getresponse()
-            data = response.read()
-            d = json.loads(data)
+#             # PUT in the user
+#             params = urllib.urlencode({'_id': assignedUserID, 'name': assignedUserName, 'email': assignedUserEmail, 'dateCreated': assignedUserDate, 'pendingTasks': assignedUserTasks}, True)
+#             conn.request("PUT", "/api/users/"+assignedUserID, params, headers)
+#             response = conn.getresponse()
+#             data = response.read()
+#             d = json.loads(data) 
 
     # Exit gracefully
     conn.close()
-    print str(userCount)+" users and "+str(taskCount)+" tasks added at "+baseurl+":"+str(port)
+    print str(userCount)+" users added at " +baseurl+":"+str(port)
 
 
 if __name__ == "__main__":

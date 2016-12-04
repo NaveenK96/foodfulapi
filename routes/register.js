@@ -13,7 +13,10 @@ module.exports = function(router) {
     new_user.email = req.body.email;
     new_user.phone_number = req.body.phone_number;
     new_user.location = eval("("+req.body.location+")");
-    new_user.hour = req.body.hour;
+    new_user.start_hour = req.body.start_hour;
+    new_user.start_minute = req.body.start_minute;
+    new_user.end_hour = req.body.end_hour;    
+    new_user.end_minute = req.body.end_minute;
 
     new_user.setPassword(req.body.password);
     User.create(new_user, function (err, user) {
