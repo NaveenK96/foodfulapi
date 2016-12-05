@@ -28,7 +28,7 @@ module.exports = function(router) {
   });
 
   /* POST /users */
-  userRoute.post(function(res, req) {
+  /*userRoute.post(function(res, req) {
       User.create(req.body, function (err, user){
         if (err){
           res.statusCode = 500;
@@ -47,10 +47,10 @@ module.exports = function(router) {
             });
         }
       });
-  });
+  });*/
 
   /* GET /users/id */
-  userIdRoute.get(function(req, res) {
+  /*userIdRoute.get(function(req, res) {
     User.findById(req.params.id, function (err, user) {
       if (err){
         res.statusCode = 500;
@@ -78,10 +78,10 @@ module.exports = function(router) {
         )
       }
     })
-  });
+  });*/
 
   /* PUT /users/id */
-  userIdRoute.put(function(req, res) {
+  /*userIdRoute.put(function(req, res) {
     User.findByIdAndUpdate(req.params.id, req.body, {new: true}, function (err, user){
       if (err){
 
@@ -95,10 +95,10 @@ module.exports = function(router) {
         )
       }
     });
-  });
+  });*/
 
   /* DELETE /users/id */
-  userIdRoute.delete(function(req, res) {
+  /*userIdRoute.delete(function(req, res) {
     if (!isIdValid(req.params.id)){
       res.statusCode = 404;
       res.json(
@@ -128,7 +128,7 @@ module.exports = function(router) {
         }
       });
     }
-  }); 
+  }); */
 
   return router;
 }

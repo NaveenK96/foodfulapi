@@ -68,6 +68,8 @@ def main(argv):
 
     typeIDs = [0,1]
 
+    passwords = ["kasdjaskdjih3uihasds", "dkasldhkdhhddaasd", "dkashjdjkashdjh23"]
+
     phoneNumbers = ["0123456789","1234567890"]
 
     locations = [[1,2], [2,3], [2,4]]
@@ -93,20 +95,22 @@ def main(argv):
         x = randint(0,99)
         y = randint(0,99)
         randPhone = randint(0, len(phoneNumbers)-1)
+        randPw = randint(0, len(passwords)-1)
         randType = randint(0,1)
         randLocation = randint(0,len(locations)-1)
         randHour = randint(0, len(hours)-1)
         params = urllib.urlencode(
             {
                 'typeID': typeIDs[randType],
-                'name': firstNames[x] + " " + lastNames[y], 
+                'name': firstNames[x] + " " + lastNames[y],
+                'password': passwords[randPw],
                 'email': firstNames[x] + "@" + lastNames[y] + ".com",
                 'phone_number': phoneNumbers[randPhone],
                 'location': locations[randLocation],
                 'start_hour': hours[randHour][0],
                 'start_minute': hours[randHour][1],
                 'end_hour': hours[randHour][2],
-                'end_hour': hours[randHour][3]
+                'end_minute': hours[randHour][3]
             })
         
         # POST the register
@@ -117,9 +121,9 @@ def main(argv):
         d = json.loads(data)
 
         # Store the users id
-        userIDs.append(str(d['data']['_id']))
-        userNames.append(str(d['data']['name']))
-        userEmails.append(str(d['data']['email']))
+        # userIDs.append(str(d['data']['_id']))
+        # userNames.append(str(d['data']['name']))
+        # userEmails.append(str(d['data']['email']))
 
     # Open 'tasks.txt' for sample task names
 #    f = open('tasks.txt','r')
