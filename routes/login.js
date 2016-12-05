@@ -26,7 +26,7 @@ module.exports = function(router) {
 					res.json({
 						'token': token,
 						message: 'Authentication Successful',
-						data: []
+						data: user
 					});
 				}else{
 					// If user is not found

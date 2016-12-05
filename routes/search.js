@@ -7,26 +7,12 @@ module.exports = function(router) {
   var searchRoute = router.route('/search');
 
 	searchRoute.post(function(req, res){
+		var typeID = req.body.typeID;
 		var lat = req.body.latitude;
 		var long = req.body.longitude;
 		var distance = req.body.distance;
+		var rating = req.body.rating;
 
-		var skipVar = 10;
-		var limitVar = 10;
-		var countVar = req.query.count;
-
-		/*if (!count){
-			User.find(where, {skip: skipVar, limit: limitVar}, function(err, users) {
-				if (err){
-
-				}else{
-
-				}
-			});
-		}else{
-			User.find()
-		}
-		*/
 
 		var query = User.find({});
 
@@ -36,9 +22,21 @@ module.exports = function(router) {
 			maxDistance: distance * 1609.34, spherical: true});
 		}
 
+		if (typeID) {
+			query.where('typeID').equals(typeID);
+		}
+
+		if (rating) {
+			query.where('rating').gte(rating);
+		}
+
 		query.exec(function(err, users){ 
 			if (err){
-
+				res.status(500);
+				res.json({
+					message: err,
+					data: []
+				});
 			}else{
 				res.status(200);
 				res.json({
