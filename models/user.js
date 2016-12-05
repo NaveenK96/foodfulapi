@@ -2,6 +2,7 @@ var credentials = require('../config/credentials');
 
 // Load required packages
 var mongoose = require('mongoose');
+var uniqueValidator = require('mongoose-unique-validator');
 var crypto = require('crypto');
 var jwt = require('jsonwebtoken');
 
@@ -31,6 +32,7 @@ var UserSchema = new mongoose.Schema({
   created_date: { type: Date, default: Date.now },
   updated_date: { type: Date, default: Date.now },
 });
+User.plugin(uniqueValidator);
 
 //UserSchema.index({location: '2dsphere'});
 // User authentication and security
