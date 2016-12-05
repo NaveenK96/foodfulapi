@@ -2,6 +2,7 @@ var credentials = require('../config/credentials');
 
 // Load required packages
 var mongoose = require('mongoose');
+var uniqueValidator = require('mongoose-unique-validator');
 var crypto = require('crypto');
 var jwt = require('jsonwebtoken');
 
@@ -17,7 +18,7 @@ var UserSchema = new mongoose.Schema({
   hash: String,
   salt: String,
   description: {type: String },
-  email: { type: String, uinique: true, required: true },
+  email: { type: String, unique: true, required: true },
   phone_number: { type: Number, required: true },
   location: { type: [Number], index: '2dsphere', required: true }, // [Long, Lat], index important for proximity searches
   /* Hour Format HH:MM -> HH:MM */
@@ -31,6 +32,7 @@ var UserSchema = new mongoose.Schema({
   created_date: { type: Date, default: Date.now },
   updated_date: { type: Date, default: Date.now },
 });
+UserSchema.plugin(uniqueValidator);
 
 //UserSchema.index({location: '2dsphere'});
 // User authentication and security
