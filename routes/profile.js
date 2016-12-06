@@ -21,13 +21,13 @@ module.exports = function(router) {
 				message: 'UnauthorizedError: private profile',
 				data: []	
 			});
-		}else if (!isIdValid(req.payload._id)){
+		}/*else if (!isIdValid(req.payload._id)){
 			res.status(404);
 			res.json({
 				message: 'Profile not found.',
 				data: []
 			});
-		}else{
+		}*/else{
 			User.findById(req.payload._id, function(err, user){
 				if (err){
 					res.status(500);
