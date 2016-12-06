@@ -14,7 +14,7 @@ module.exports = function(router) {
 	var profileIDRoute = router.route('/profile/:id'); // All requires authentication
 
 	/* GET profile/:id */
-	profileIDRoute.get(auth, function(req, res){
+	profileRoute.get(auth, function(req, res){
 		if (!req.payload._id){
 			res.status(401);
 			res.json({
@@ -47,7 +47,7 @@ module.exports = function(router) {
 	});
 
 	/* PUT profile/:id */
-	profileIDRoute.put(auth, function(req, res){
+	profileRoute.put(auth, function(req, res){
 		if (!req.payload._id){
 			res.status(401);
 			res.json({
@@ -79,7 +79,7 @@ module.exports = function(router) {
 
 
 	/* DELETE profile/:id */
-	profileIDRoute.delete(auth, function(req, res){
+	profileRoute.delete(auth, function(req, res){
 		if (!req.payload._id){
 			res.status(401);
 			res.json({
