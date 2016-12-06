@@ -120,6 +120,7 @@ module.exports = function(router) {
 				var phone_number = req.body.phone_number;
 				var favorites = req.body.favorites;
 				var amount = req.body.amount;
+				var address = req.body.address;
 				var location = req.body.loc;
 				var description = req.body.description;
 				var start_hour = req.body.start_hour;
@@ -148,6 +149,10 @@ module.exports = function(router) {
 					query = query.where('amount').update(amount);
 				}
 
+				if (address) { 
+					query = query.where('address').update(address);
+				}
+				
 				if (location) {
 					query = query.where('location').update(loc);
 				}
