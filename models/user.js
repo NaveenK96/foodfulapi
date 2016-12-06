@@ -12,6 +12,11 @@ var jwt = require('jsonwebtoken');
    0 - Donor
    1 - Donatee
 */ 
+/* Amount */
+/*
+   0 - Doesn't Accept
+   1 - Accept
+*/
 var UserSchema = new mongoose.Schema({
   typeID: { type: Number, required: true }, // Refer to above
   name: { type: String, required: true },
@@ -26,8 +31,9 @@ var UserSchema = new mongoose.Schema({
   start_minute: { type: Number, required: true },
   end_hour: { type: Number, required: true },
   end_minute: { type: Number, required: true },
-  amount: { type: Number, default: 0 }, 
+  amount: { type: Number, default: 1 }, 
   rating: { type: Number, default: 0 }, 
+  num_ratings: {type: [Number] },
   favorites: { type: [String] }, // List of bookmarked ids  
   created_date: { type: Date, default: Date.now },
   updated_date: { type: Date, default: Date.now },
