@@ -26,6 +26,9 @@ var UserSchema = new mongoose.Schema({
   email: { type: String, unique: true, required: true },
   phone_number: { type: Number, required: true },
   address: { type: String, required: true },
+  city: { type: String, required: true},
+  state: { type: String, required: true },
+  zipcode:{ type: String, required: true },
   location: { type: [Number], index: '2dsphere', required: true }, // [Long, Lat], index important for proximity searches
   /* Hour Format HH:MM -> HH:MM */
   start_hour: { type: Number, required: true },
