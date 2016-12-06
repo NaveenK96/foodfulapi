@@ -1,5 +1,5 @@
 var User = require('../models/user');
-
+var mongoose = require('mongoose');
 module.exports = function(router) {
   // Routes
   var userRoute = router.route('/users');

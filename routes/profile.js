@@ -1,5 +1,6 @@
 var credentials = require('../config/credentials');
 var jwt = require('express-jwt');
+var mongoose = require('mongoose');
 // Schema
 var User = require('../models/user');
 
