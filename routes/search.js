@@ -13,7 +13,6 @@ module.exports = function(router) {
 		var distance = req.body.distance;
 		var rating = req.body.rating;
 
-
 		var query = User.find({});
 
 		if (distance){

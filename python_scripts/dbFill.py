@@ -74,7 +74,7 @@ def main(argv):
 
     addresses = ["Siebel Ave", "Cristobal Ave", "Green St"]
 
-    locations = [[1,2], [2,3], [2,4]]
+    locations = [[40.2138425,-88.119828], [41.2138425,-89.219828], [40.7138425,-88.519828]]
 
     hours = [[1,30,2,30], [2,20,15,20]]
  
@@ -100,7 +100,8 @@ def main(argv):
         randPw = randint(0, len(passwords)-1)
         randType = randint(0,1)
         randAddress = randint(0, len(addresses)-1)
-        randLocation = randint(0,len(locations)-1)
+        #randLocation = randint(0,len(locations)-1)
+        randLocation = i
         randHour = randint(0, len(hours)-1)
         params = urllib.urlencode(
             {
@@ -110,8 +111,9 @@ def main(argv):
                 'email': firstNames[x] + "@" + lastNames[y] + ".com",
                 'phone_number': phoneNumbers[randPhone],
                 'address': addresses[randAddress],
-                'location[0]': locations[randLocation][0],
-                'location[1]': locations[randLocation][1],
+                'loc[0]': locations[randLocation][0],
+                'loc[1]': locations[randLocation][1],
+                #'location': locations[randLocation],
                 'start_hour': hours[randHour][0],
                 'start_minute': hours[randHour][1],
                 'end_hour': hours[randHour][2],
