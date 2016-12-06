@@ -12,6 +12,7 @@ module.exports = function(router) {
     new_user.name = req.body.name;
     new_user.email = req.body.email;
     new_user.phone_number = req.body.phone_number;
+    new_user.address = req.body.address;
     new_user.location = req.body.loc; // Make sure its an array not a string
     new_user.start_hour = req.body.start_hour;
     new_user.start_minute = req.body.start_minute;
