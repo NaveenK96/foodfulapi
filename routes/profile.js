@@ -107,17 +107,35 @@ module.exports = function(router) {
 
 	/* TEST */
 	profileIDRoute.put(function(req, res){
-			var query = User.findByIdAndUpdate(req.params.id, { new: true});
+			var query = User.findByIdAndUpdate(req.params.id, req.body, { new: true}, function(err, post){
+				if (err){
+					res.statusCode = 500;
+					res.json(
+					{ message: err,
+						data: []
+					}
+					); 
+			}else{
+				            res.statusCode = 200;
+						res.json(
+						{ message: 'OK',
+							data: post
+						}
+						);
+			}
+			});
+	});
+			
 				//var typeID = req.body.typeID;
-				var name = req.body.name;
+				/*var name = req.body.name;
 				var email = req.body.email;
 				var phone_number = req.body.phone_number;
 				var favorites = req.body.favorites;
 				var amount = req.body.amount;
 				var address = req.body.address;
 				var city = req.body.city;
-				var state = req.body.city;
-				var zipcode = req.body.city;
+				var state = req.body.state;
+				var zipcode = req.body.zipcode;
 				var location = req.body.loc;
 				var description = req.body.description;
 				var start_hour = req.body.start_hour;
@@ -201,7 +219,7 @@ module.exports = function(router) {
 					});
 				}
 			});
-		});
+		});*/
 
 	/* PUT profile/ */
 	/*profileRoute.put(auth, function(req, res){
