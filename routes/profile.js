@@ -13,6 +13,7 @@ var auth = jwt({
 module.exports = function(router) {
 	var profileRoute = router.route('/profile');
 	var profileIDRoute = router.route('/profile/:id'); // All requires authentication
+	var profileIDFavoriteRoute = router.route('/profile/:id/favorite')
 
 
 	/* GET profile/:id */
@@ -105,26 +106,26 @@ module.exports = function(router) {
 		}
 	});
 
-	/* TEST */
+	/* Update Loggined User's favorite list */
 	profileIDRoute.put(function(req, res){
-			var query = User.findByIdAndUpdate(req.params.id, req.body, { new: true}, function(err, post){
-				if (err){
-					res.statusCode = 500;
-					res.json(
-					{ message: err,
-						data: []
-					}
-					); 
-			}else{
-				            res.statusCode = 200;
-						res.json(
-						{ message: 'OK',
-							data: post
-						}
-						);
-			}
-			});
-	});
+	var query = User.findByIdAndUpdate(req.params.id, req.body, { new: true}, function(err, post){
+		if (err){
+			res.statusCode = 500;
+			res.json(
+			{ 
+				message: err,
+				data: []
+			}); 
+    }else{
+      res.statusCode = 200;
+      res.json(
+      { 
+        message: 'OK',
+        data: post
+      });
+    };
+  });
+});
 			
 				//var typeID = req.body.typeID;
 				/*var name = req.body.name;

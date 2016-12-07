@@ -9,6 +9,7 @@ module.exports = function(router) {
   registerRoute.post(function(req, res){
     var new_user = new User();
     new_user.typeID = req.body.typeID;
+    new_user.description = req.body.description;
     new_user.name = req.body.name;
     new_user.email = req.body.email;
     new_user.phone_number = req.body.phone_number;
