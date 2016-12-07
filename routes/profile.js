@@ -43,7 +43,7 @@ module.exports = function(router) {
 	});
 
 	/* Allows People to edit public profile such as rating */
-	profileIDRoute.put(function(req, res) {
+	/*profileIDRoute.put(function(req, res) {
 		var query = User.findById(req.params.id);
 		var num_ratings = req.body.num_ratings;
 		var rating = 0;
@@ -76,7 +76,7 @@ module.exports = function(router) {
 				});
 			}
 		});
-	})
+	})*/
 
 	/* GET private profile/ */
 	profileRoute.get(auth, function(req, res){
