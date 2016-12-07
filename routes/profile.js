@@ -105,8 +105,110 @@ module.exports = function(router) {
 		}
 	});
 
-	/* PUT profile/:id */
-	profileRoute.put(auth, function(req, res){
+	/* TEST */
+	profileIDRoute.put(function(req, res){
+			var query = User.findByIdAndUpdate(req.params.id, { new: true});
+				//var typeID = req.body.typeID;
+				var name = req.body.name;
+				var email = req.body.email;
+				var phone_number = req.body.phone_number;
+				var favorites = req.body.favorites;
+				var amount = req.body.amount;
+				var address = req.body.address;
+				var city = req.body.city;
+				var state = req.body.city;
+				var zipcode = req.body.city;
+				var location = req.body.loc;
+				var description = req.body.description;
+				var start_hour = req.body.start_hour;
+				var start_minute = req.body.start_minute;
+				var end_hour = req.body.end_hour;
+				var end_minute = req.body.end_minute;
+				var updated_date = Date.now;				
+
+				if (typeID) {
+					query = query.where('typeID').update(typeID);
+				}
+
+				if (name) {
+					query = query.where('name').update(name);
+				}
+
+				if (email) {
+					query = query.where('phone_number').update(phone_number);
+				}
+
+				if (favorites) {
+					query = query.where('favorites').update(favorites);
+				}
+
+				if (amount) {
+					query = query.where('amount').update(amount);
+				}
+
+				if (address) { 
+					query = query.where('address').update(address);
+				}
+				
+				if (city) {
+					query = query.where('city').update(city);
+				}
+
+				if (state) {
+					query = query.where('state').update(state);
+				}
+
+				if (zipcode) {
+					query = query.where('zipcode').update(zipcode);
+				}
+
+				if (location) {
+					query = query.where('location').update(loc);
+				}
+
+				if (description) { 
+					query = query.where('description').update(description);
+				}
+
+				if(start_hour) {
+					query = query.where('start_hour').update(start_hour);
+				}
+
+				if (start_minute) {
+					query = query.where('start_minute').update(start_minute);
+				}
+
+				if (end_hour) {
+					query = query.where('end_hour').update(end_hour);
+				}
+
+				if (end_minute) {
+					query = query.where('end_minute').update(end_minute);
+				}
+
+				if (updated_date) {
+					query = query.where('updated_date').update(updated_date);
+				}
+
+				query.exec(function(err, user) {
+					if (err){
+						res.status(500);
+						res.json({
+							message: err,
+							data: []
+						})
+					}else{
+				res.status(200);
+					res.json({
+						message: 'Successfully edited!',
+						data: user
+					});
+				}
+			});
+		});
+
+	/* PUT profile/ */
+	/*profileRoute.put(auth, function(req, res){
 		if (!req.payload._id){
 			res.status(401);
 			res.json({
@@ -168,7 +270,7 @@ module.exports = function(router) {
 				if (zipcode) {
 					query = query.where('zipcode').update(zipcode);
 				}
-				
+
 				if (location) {
 					query = query.where('location').update(loc);
 				}
@@ -213,7 +315,7 @@ module.exports = function(router) {
 				}
 			});
 		}
-	});
+	});*/
 
 
 	/* DELETE profile/:id */
