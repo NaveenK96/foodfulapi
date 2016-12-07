@@ -126,10 +126,6 @@ module.exports = function(router) {
 				var end_minute = req.body.end_minute;
 				var updated_date = Date.now;				
 
-				if (typeID) {
-					query = query.where('typeID').update(typeID);
-				}
-
 				if (name) {
 					query = query.where('name').update(name);
 				}
