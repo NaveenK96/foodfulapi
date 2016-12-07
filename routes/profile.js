@@ -122,6 +122,9 @@ module.exports = function(router) {
 				var favorites = req.body.favorites;
 				var amount = req.body.amount;
 				var address = req.body.address;
+				var city = req.body.city;
+				var state = req.body.city;
+				var zipcode = req.body.city;
 				var location = req.body.loc;
 				var description = req.body.description;
 				var start_hour = req.body.start_hour;
@@ -152,6 +155,18 @@ module.exports = function(router) {
 
 				if (address) { 
 					query = query.where('address').update(address);
+				}
+				
+				if (city) {
+					query = query.where('city').update(city);
+				}
+
+				if (state) {
+					query = query.where('state').update(state);
+				}
+
+				if (zipcode) {
+					query = query.where('zipcode').update(zipcode);
 				}
 				
 				if (location) {
